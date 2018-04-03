@@ -1,12 +1,13 @@
 'use strict';
 
-var colors = ['rgb(255, 0, 0)','rgb(255, 255, 0)','rgb(255, 0, 255)',
-				'rgb(0, 255, 0)','rgb(0, 0, 255)','rgb(255, 255, 255)'];
+var colors = generateRandomColors(6);
 
 var squares = document.querySelectorAll('.square');
 var colorDisplay = document.getElementById('colorDisplay');
 var messageDisplay = document.getElementById('message');
-var pickedColor = colors[3];
+var h1 = document.querySelector('h1');  // To select the main heading 'The Great rgb Game..'--> To change the background color of h1.
+var pickedColor = pickColor();    //pickColor() is the function which is returning colors[random]
+
 
 
 colorDisplay.textContent = pickedColor;
@@ -26,13 +27,15 @@ for(var i = 0; i<squares.length; i++)           //To add colors to the squares
 		var clickedColor = this.style.backgroundColor;
 
 		//compare clickedColor with pickedColor
+		console.log(clickedColor, pickedColor);
 		if(clickedColor === pickedColor)
 		{
-			alert("Correct");
+			//alert("Correct");
 			messageDisplay.textContent = "Correct";
 			for(var j=0;j<squares.length;j++)
 			{
 				squares[j].style.backgroundColor = clickedColor;
+				h1.style.backgroundColor = clickedColor;
 			}
 			
 		}
@@ -43,7 +46,46 @@ for(var i = 0; i<squares.length; i++)           //To add colors to the squares
 		}
 
 	});
+	
 }
 
+/*This function will randomly select a color from colors array by doing 2 things :
+1. Generate a random number. variable random.
+2. Return colors[random]. Pass that number to colors array to choose a random color. 
+for example- if random number generated = 3 then colors[random] will be done which means colors[3] which will give
+us the 4th element of colors array. [when we hard coded this code, at that time colors[3] = rgb(0, 255, 0)]
 
+How does Math.random work?
+Math.random() will generate random numbers like 0.632922020292 , 0.98237282922, 0.92873339222 ..... This doesn't count 1.
+So if we need numbers between 1 and 6 then Math.random * 7 will give random values max till 6.99999 
+Since we need the value(whole number) only between 1-6 so we will chop off the decimal part by using Math.floor 
+*/
+function pickColor(){
+	var random = Math.floor(Math.random() * colors.length);
+	return colors[random];
+}
+
+function generateRandomColors(num){
+	//make an array
+	var arr = [];
+	//repeat num times 
+	for(var i = 0; i<num; i++)
+	{
+		arr.push(randomColor())
+	}
+	//return array
+	return arr;
+}
+
+function randomColor()
+{
+	//pick a red from 0 - 255
+	var r = Math.floor(Math.random() * 256);
+	//pick a green from 0 - 255
+	var g = Math.floor(Math.random() * 256);
+	//pick a blue from 0 - 255
+	var b = Math.floor(Math.random() * 256);
+
+	return "rgb(" + r + ", " + g + ", " + b + ")";
+}
 
