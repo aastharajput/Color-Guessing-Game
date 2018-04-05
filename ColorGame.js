@@ -16,6 +16,8 @@ colorDisplay.textContent = pickedColor;
 resetButton.addEventListener('click', function(){
 	//change this button's textContent to 'NEW COLORS'. This is because after we won this button's text changed to Play Again.
 	resetButton.textContent = 'NEW COLORS';
+	//remove 'Correct' and 'Try Again' when we start a new game.
+	messageDisplay.textContent = ''; 
 	//change h1 color to #232323 because a new game is starting.
 	h1.style.backgroundColor = '#232323';
 	//generate all new colors 
@@ -52,11 +54,12 @@ for(var i = 0; i<squares.length; i++)           //To add colors to the squares
 		{
 			//alert("Correct");
 			messageDisplay.textContent = "Correct";
+			resetButton.textContent = 'Play Again!';
 			for(var j=0;j<squares.length;j++)
 			{
 				squares[j].style.backgroundColor = clickedColor;
 				h1.style.backgroundColor = clickedColor;
-				resetButton.textContent = 'Play Again!';
+				
 			}
 			
 		}
