@@ -1,6 +1,7 @@
 'use strict';
 
-var colors = generateRandomColors(6);
+var numOfSquares = 6;
+var colors = generateRandomColors(numOfSquares);
 
 var squares = document.querySelectorAll('.square');
 var colorDisplay = document.getElementById('colorDisplay');
@@ -12,32 +13,68 @@ var easyButton = document.getElementById('easy');
 var hardButton = document.getElementById('hard');
 
 
-
 colorDisplay.textContent = pickedColor;
 
 easyButton.addEventListener('click',function(){
 	hardButton.classList.remove('selected');
 	easyButton.classList.add('selected');
+	numOfSquares = 3;
+	//generate 3 random colors
+	colors = generateRandomColors(numOfSquares);
+	//pick a new random color from colors array
+	pickedColor = pickColor();
+	//change colorDisplay to match the picked color
+	colorDisplay.textContent = pickedColor;
+	//change the colors of squares
+	for(var i= 0 ; i<squares.length; i++)
+	{
+		if(colors[i])     //If there is a color in colors array then do this. There are only 3 colors in colors array.
+		{				  //There are 6 squares and 3 colors so until we have colors , 'if' part will work and then 'else' part will run.
+			squares[i].style.backgroundColor = colors[i];
+		}
+		else           // In this, we will hide the next 3 squares 
+		{
+			squares[i].style.display = 'none';
+		}
+	}
+	
 });
 
 hardButton.addEventListener('click',function(){
 	easyButton.classList.remove('selected');
 	hardButton.classList.add('selected');
+	numOfSquares = 6;
+	//generate 6 random colors
+	colors = generateRandomColors(numOfSquares);
+	//pick a new random color from colors array
+	pickedColor = pickColor();
+	//change colorDisplay to match the picked color
+	colorDisplay.textContent = pickedColor;
+	//change the colors of squares
+	for(var i= 0 ; i<squares.length; i++)
+	{
+		if(colors[i])     //If there is a color in colors array then do this. There are 6 colors in colors array.
+		{				  //There are 6 squares and 6 colors so until we have colors , 'if' part will work and then 'else' part will run.
+			squares[i].style.backgroundColor = colors[i];
+			squares[i].style.display = 'block';   //This make the hidden squares visible. 
+		}
+	}
 });
 
 resetButton.addEventListener('click', function(){
+	
+	//generate all new colors 
+	colors = generateRandomColors(numOfSquares);    //We are generating 6 colors because we want the game to start wil HARD level by default.
+	//pick a new random color from colors array
+	pickedColor = pickColor(); 
+	//change colorDisplay to match the picked color
+	colorDisplay.textContent = pickedColor;
 	//change this button's textContent to 'NEW COLORS'. This is because after we won this button's text changed to Play Again.
 	resetButton.textContent = 'NEW COLORS';
 	//remove 'Correct' and 'Try Again' when we start a new game.
 	messageDisplay.textContent = ''; 
 	//change h1 color to #232323 because a new game is starting.
-	h1.style.backgroundColor = '#232323';
-	//generate all new colors 
-	colors = generateRandomColors(6);
-	//pick a new random color from colors array
-	pickedColor = pickColor(); 
-	//change colorDisplay to match the picked color
-	colorDisplay.textContent = pickedColor;
+	h1.style.backgroundColor = 'steelblue';
 	//change colors of squares 
 	for(var i= 0 ; i<squares.length; i++)
 	{
