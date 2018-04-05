@@ -6,11 +6,31 @@ var squares = document.querySelectorAll('.square');
 var colorDisplay = document.getElementById('colorDisplay');
 var messageDisplay = document.getElementById('message');
 var h1 = document.querySelector('h1');  // To select the main heading 'The Great rgb Game..'--> To change the background color of h1.
+var resetButton = document.querySelector('button');
 var pickedColor = pickColor();    //pickColor() is the function which is returning colors[random]
 
 
 
 colorDisplay.textContent = pickedColor;
+
+resetButton.addEventListener('click', function(){
+	//change this button's textContent to 'NEW COLORS'. This is because after we won this button's text changed to Play Again.
+	resetButton.textContent = 'NEW COLORS';
+	//change h1 color to #232323 because a new game is starting.
+	h1.style.backgroundColor = '#232323';
+	//generate all new colors 
+	colors = generateRandomColors(6);
+	//pick a new random color from colors array
+	pickedColor = pickColor(); 
+	//change colorDisplay to match the picked color
+	colorDisplay.textContent = pickedColor;
+	//change colors of squares 
+	for(var i= 0 ; i<squares.length; i++)
+	{
+		squares[i].style.backgroundColor = colors[i];
+	}
+
+});
 
 for(var i = 0; i<squares.length; i++)           //To add colors to the squares
 {
@@ -36,6 +56,7 @@ for(var i = 0; i<squares.length; i++)           //To add colors to the squares
 			{
 				squares[j].style.backgroundColor = clickedColor;
 				h1.style.backgroundColor = clickedColor;
+				resetButton.textContent = 'Play Again!';
 			}
 			
 		}
@@ -88,4 +109,5 @@ function randomColor()
 
 	return "rgb(" + r + ", " + g + ", " + b + ")";
 }
+
 
