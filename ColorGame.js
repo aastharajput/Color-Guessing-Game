@@ -8,10 +8,22 @@ var messageDisplay = document.getElementById('message');
 var h1 = document.querySelector('h1');  // To select the main heading 'The Great rgb Game..'--> To change the background color of h1.
 var resetButton = document.querySelector('button');
 var pickedColor = pickColor();    //pickColor() is the function which is returning colors[random]
+var easyButton = document.getElementById('easy');
+var hardButton = document.getElementById('hard');
 
 
 
 colorDisplay.textContent = pickedColor;
+
+easyButton.addEventListener('click',function(){
+	hardButton.classList.remove('selected');
+	easyButton.classList.add('selected');
+});
+
+hardButton.addEventListener('click',function(){
+	easyButton.classList.remove('selected');
+	hardButton.classList.add('selected');
+});
 
 resetButton.addEventListener('click', function(){
 	//change this button's textContent to 'NEW COLORS'. This is because after we won this button's text changed to Play Again.
