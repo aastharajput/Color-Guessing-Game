@@ -9,6 +9,10 @@ body{
 	padding-bottom: 30%;
 	float: left;
 	margin: 1.66%
+	border: 20px;
+	border-radius: 50%;
+	
+
 }
 
 .container{
@@ -56,6 +60,7 @@ button{
 	font-family: "Montserrat","Avenir";
 	font-size: inherit;
 	letter-spacing: 1px;
+	transition: all 0.3s;
 }
 
 button:hover{
